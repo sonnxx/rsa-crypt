@@ -73,41 +73,12 @@ class RsaUtils
 
     /**
      * [genRSAKey - Create file key ssh]
-     * @return [file] [publicKey && privKey]
+     * @return [aray] [publicKey && privKey]
      */
     function genRSAKey(){
 
-        $config = array(
-            "digest_alg" => "sha512",
-            "private_key_bits" => 4096,
-            "private_key_type" => OPENSSL_KEYTYPE_RSA,
-        );
-            
-        // Create the private and public key
-        $res = openssl_pkey_new($config);
-
-        // Extract the private key from $res to $privKey
-        openssl_pkey_export($res, $privKey);
-
-        // Extract the public key from $res to $pubKey
-        $pubKey = openssl_pkey_get_details($res);
-        $pubKey = $pubKey["key"];
-
-        $path_key = ROOT_PATH . DS . 'Utils/key';
-
-        if (!file_exists($path_key)) {
-            mkdir($path_key, 0777, true);
-        }
-        $PathFilenamePubKey = $path_key . DS . 'rsaPubKey.pub';
-        $PathFilenamePrivKey= $path_key . DS . 'rsaPrivKey';
-
-        if (file_put_contents($PathFilenamePubKey, $pubKey) !== false && file_put_contents($PathFilenamePrivKey, $privKey) !== false) {
-            echo "File created (" . basename($PathFilenamePubKey) . ")";
-            echo "File created (" . basename($PathFilenamePrivKey) . ")";
-        } else {
-            echo "Cannot create file (" . basename($PathFilenamePubKey) . ")";
-            echo "Cannot create file (" . basename($PathFilenamePrivKey) . ")";
-        }
+        $rsa = new Crypt_RSA();
+        return $rsa->createKey();
     }
 
 }
