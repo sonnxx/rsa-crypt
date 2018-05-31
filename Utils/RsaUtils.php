@@ -1,5 +1,4 @@
 <?php
-
 /**
  * 
  * Create by
@@ -7,20 +6,15 @@
  * @version 1.0
  */
 
-
 include_once ROOT_PATH . DS . 'Crypt/RSA.php';
+
 /**
- * 
+ * class RsaUtils
  */
 class RsaUtils
 {
-    
     function __construct(){
         # code...
-    }
-
-    function msg(){
-        return 'sonnx';
     }
 
     /**
@@ -72,11 +66,10 @@ class RsaUtils
     }
 
     /**
-     * [genRSAKey - Create file key ssh]
-     * @return [aray] [publicKey && privKey]
+     * [genRSAKey - Create key ssh]
+     * @return [aray] privatekey && publickey && partialkey
      */
     function genRSAKey(){
-
         $rsa = new Crypt_RSA();
         return $rsa->createKey();
     }
